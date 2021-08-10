@@ -8,21 +8,72 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
-namespace PCActivityTracker.Properties
-{
+namespace PCActivityTracker.Properties {
+    
+    
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
-    {
-
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-
-        public static Settings Default
-        {
-            get
-            {
+        
+        public static Settings Default {
+            get {
                 return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00:00:05")]
+        public global::System.TimeSpan pollingRate {
+            get {
+                return ((global::System.TimeSpan)(this["pollingRate"]));
+            }
+            set {
+                this["pollingRate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("90.00:00:00")]
+        public global::System.TimeSpan dataLifetime {
+            get {
+                return ((global::System.TimeSpan)(this["dataLifetime"]));
+            }
+            set {
+                this["dataLifetime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("%LOCALAPPDATA%\\PCActivityTracker\\TrackingData\\")]
+        public string dataDirectory {
+            get {
+                return ((string)(this["dataDirectory"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("01:30:00")]
+        public global::System.TimeSpan BreakFreq {
+            get {
+                return ((global::System.TimeSpan)(this["BreakFreq"]));
+            }
+            set {
+                this["BreakFreq"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("%LOCALAPPDATA%\\PCActivityTracker\\blacklist.dat")]
+        public string blacklistFile {
+            get {
+                return ((string)(this["blacklistFile"]));
             }
         }
     }

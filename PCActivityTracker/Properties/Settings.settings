@@ -1,7 +1,21 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PCActivityTracker.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="pollingRate" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:00:05</Value>
+    </Setting>
+    <Setting Name="dataLifetime" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">90.00:00:00</Value>
+    </Setting>
+    <Setting Name="dataDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">%LOCALAPPDATA%\PCActivityTracker\TrackingData\</Value>
+    </Setting>
+    <Setting Name="BreakFreq" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">01:30:00</Value>
+    </Setting>
+    <Setting Name="blacklistFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">%LOCALAPPDATA%\PCActivityTracker\blacklist.dat</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
