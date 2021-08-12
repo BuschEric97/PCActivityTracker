@@ -11,7 +11,7 @@
     <Setting Name="dataDirectory" Type="System.String" Scope="Application">
       <Value Profile="(Default)">%LOCALAPPDATA%\PCActivityTracker\TrackingData\</Value>
     </Setting>
-    <Setting Name="BreakFreq" Type="System.TimeSpan" Scope="User">
+    <Setting Name="breakFreq" Type="System.TimeSpan" Scope="User">
       <Value Profile="(Default)">01:30:00</Value>
     </Setting>
     <Setting Name="blacklistFile" Type="System.String" Scope="Application">
