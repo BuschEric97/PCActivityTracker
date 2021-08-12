@@ -11,18 +11,16 @@ namespace PCActivityTracker
 
         private void saveSettingsButton_Click(object sender, System.EventArgs e) {
             // get the user's requested polling rate
-            System.TimeSpan userPollingRate;
-            if (System.TimeSpan.TryParse(pollingRateInput.Text, out userPollingRate)) {
+            if (TimeSpan.TryParse(pollingRateInput.Text, out TimeSpan userPollingRate)) {
                 Properties.Settings.Default.pollingRate = userPollingRate;
             }
 
             // get the user's requested data lifetime
-            System.TimeSpan userDataLifetime = System.TimeSpan.FromDays(Convert.ToDouble(dataLifetimeInput.Text));
+            TimeSpan userDataLifetime = TimeSpan.FromDays(Convert.ToDouble(dataLifetimeInput.Text));
             Properties.Settings.Default.dataLifetime = userDataLifetime;
 
             // get the user's requested break frequency
-            System.TimeSpan userBreakFreq;
-            if (System.TimeSpan.TryParse(breakFreqInput.Text, out userBreakFreq)) {
+            if (TimeSpan.TryParse(breakFreqInput.Text, out TimeSpan userBreakFreq)) {
                 Properties.Settings.Default.breakFreq = userBreakFreq;
             }
 
