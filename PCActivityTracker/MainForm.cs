@@ -22,14 +22,42 @@ namespace PCActivityTracker
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
+            // start the tracker listener
             Console.WriteLine("Creating Tracking Handler!");
             ApplicationTracker.CreateHandler();
+
+            // set the app close event handler for shutting down tracker listener
             Application.ApplicationExit += new EventHandler(Application_Closing);
+
+            // set buttons appropriately for shutting down tracker listener
+            shutDownTrackerButton.Enabled = true;
+            startTrackerButton.Enabled = false;
         }
 
         private void Application_Closing(object sender, EventArgs e) {
+            // shut down the tracker listener
             Console.WriteLine("Destroying Tracking Handler!");
             ApplicationTracker.DestroyHandler();
+        }
+
+        private void shutDownTrackerButton_Click(object sender, EventArgs e) {
+            // shut down the tracker listener
+            Console.WriteLine("Destroying Tracking Handler!");
+            ApplicationTracker.DestroyHandler();
+
+            // set buttons appropriately for restarting tracker listener
+            startTrackerButton.Enabled = true;
+            shutDownTrackerButton.Enabled = false;
+        }
+
+        private void startTrackerButton_Click(object sender, EventArgs e) {
+            // start the tracker listener
+            Console.WriteLine("Creating Tracking Handler!");
+            ApplicationTracker.CreateHandler();
+
+            // set buttons appropriately for shutting down tracker listener
+            shutDownTrackerButton.Enabled = true;
+            startTrackerButton.Enabled = false;
         }
     }
 }

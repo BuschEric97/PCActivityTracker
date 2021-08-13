@@ -62,6 +62,7 @@ namespace PCActivityTracker
 
         public static void DestroyHandler() {
             UnhookWinEvent(hhook);
+            hhook = IntPtr.Zero;
         }
     }
 }
