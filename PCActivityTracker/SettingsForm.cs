@@ -10,11 +10,6 @@ namespace PCActivityTracker
         }
 
         private void saveSettingsButton_Click(object sender, System.EventArgs e) {
-            // get the user's requested polling rate
-            if (TimeSpan.TryParse(pollingRateInput.Text, out TimeSpan userPollingRate)) {
-                Properties.Settings.Default.pollingRate = userPollingRate;
-            }
-
             // get the user's requested data lifetime
             TimeSpan userDataLifetime = TimeSpan.FromDays(Convert.ToDouble(dataLifetimeInput.Text));
             Properties.Settings.Default.dataLifetime = userDataLifetime;
@@ -38,7 +33,6 @@ namespace PCActivityTracker
 
         private void SettingsForm_Load(object sender, System.EventArgs e) {
             // populate the settings form with the user's settings from the settings file
-            pollingRateInput.Text = Properties.Settings.Default.pollingRate.ToString();
             dataLifetimeInput.Text = Properties.Settings.Default.dataLifetime.Days.ToString();
             breakFreqInput.Text = Properties.Settings.Default.breakFreq.ToString();
         }

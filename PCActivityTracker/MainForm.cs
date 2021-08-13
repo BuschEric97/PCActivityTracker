@@ -21,18 +21,6 @@ namespace PCActivityTracker
             System.Diagnostics.Process.Start("https://github.com/BuschEric97/PCActivityTracker");
         }
 
-        private void getCurrentApps_Click(object sender, EventArgs e) {
-            var tracker = new ApplicationTracking();
-            var curr_procs = tracker.getAllRunningApplications();
-
-            string display_message = "Running Processes:\n";
-            foreach (Process p in curr_procs) {
-                display_message = display_message + " - " + p.ProcessName + "\n";
-            }
-
-            MessageBox.Show(display_message);
-        }
-
         private void MainForm_Load(object sender, EventArgs e) {
             Console.WriteLine("Creating Tracking Handler!");
             ApplicationTracker.CreateHandler();

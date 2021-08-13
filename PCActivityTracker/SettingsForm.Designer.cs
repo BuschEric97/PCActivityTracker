@@ -29,8 +29,6 @@ namespace PCActivityTracker
         /// </summary>
         private void InitializeComponent()
         {
-            this.pollingRateInput = new System.Windows.Forms.MaskedTextBox();
-            this.pollingRateLabel = new System.Windows.Forms.Label();
             this.dataLifetimeLabel = new System.Windows.Forms.Label();
             this.dataLifetimeInput = new System.Windows.Forms.MaskedTextBox();
             this.breakFreqLabel = new System.Windows.Forms.Label();
@@ -39,27 +37,10 @@ namespace PCActivityTracker
             this.cancelSettingsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // pollingRateInput
-            // 
-            this.pollingRateInput.Location = new System.Drawing.Point(230, 6);
-            this.pollingRateInput.Mask = "\\0\\0:00:00";
-            this.pollingRateInput.Name = "pollingRateInput";
-            this.pollingRateInput.Size = new System.Drawing.Size(100, 20);
-            this.pollingRateInput.TabIndex = 0;
-            // 
-            // pollingRateLabel
-            // 
-            this.pollingRateLabel.AutoSize = true;
-            this.pollingRateLabel.Location = new System.Drawing.Point(12, 9);
-            this.pollingRateLabel.Name = "pollingRateLabel";
-            this.pollingRateLabel.Size = new System.Drawing.Size(127, 13);
-            this.pollingRateLabel.TabIndex = 1;
-            this.pollingRateLabel.Text = "Polling Rate (HH:MM:SS)";
-            // 
             // dataLifetimeLabel
             // 
             this.dataLifetimeLabel.AutoSize = true;
-            this.dataLifetimeLabel.Location = new System.Drawing.Point(12, 40);
+            this.dataLifetimeLabel.Location = new System.Drawing.Point(12, 9);
             this.dataLifetimeLabel.Name = "dataLifetimeLabel";
             this.dataLifetimeLabel.Size = new System.Drawing.Size(100, 13);
             this.dataLifetimeLabel.TabIndex = 2;
@@ -67,7 +48,7 @@ namespace PCActivityTracker
             // 
             // dataLifetimeInput
             // 
-            this.dataLifetimeInput.Location = new System.Drawing.Point(230, 37);
+            this.dataLifetimeInput.Location = new System.Drawing.Point(230, 6);
             this.dataLifetimeInput.Mask = "90";
             this.dataLifetimeInput.Name = "dataLifetimeInput";
             this.dataLifetimeInput.Size = new System.Drawing.Size(100, 20);
@@ -76,7 +57,7 @@ namespace PCActivityTracker
             // breakFreqLabel
             // 
             this.breakFreqLabel.AutoSize = true;
-            this.breakFreqLabel.Location = new System.Drawing.Point(12, 110);
+            this.breakFreqLabel.Location = new System.Drawing.Point(12, 61);
             this.breakFreqLabel.Name = "breakFreqLabel";
             this.breakFreqLabel.Size = new System.Drawing.Size(151, 13);
             this.breakFreqLabel.TabIndex = 4;
@@ -84,7 +65,7 @@ namespace PCActivityTracker
             // 
             // breakFreqInput
             // 
-            this.breakFreqInput.Location = new System.Drawing.Point(230, 107);
+            this.breakFreqInput.Location = new System.Drawing.Point(230, 58);
             this.breakFreqInput.Mask = "90:00:00";
             this.breakFreqInput.Name = "breakFreqInput";
             this.breakFreqInput.Size = new System.Drawing.Size(100, 20);
@@ -92,7 +73,7 @@ namespace PCActivityTracker
             // 
             // saveSettingsButton
             // 
-            this.saveSettingsButton.Location = new System.Drawing.Point(174, 180);
+            this.saveSettingsButton.Location = new System.Drawing.Point(174, 130);
             this.saveSettingsButton.Name = "saveSettingsButton";
             this.saveSettingsButton.Size = new System.Drawing.Size(75, 23);
             this.saveSettingsButton.TabIndex = 6;
@@ -102,7 +83,7 @@ namespace PCActivityTracker
             // 
             // cancelSettingsButton
             // 
-            this.cancelSettingsButton.Location = new System.Drawing.Point(255, 180);
+            this.cancelSettingsButton.Location = new System.Drawing.Point(255, 130);
             this.cancelSettingsButton.Name = "cancelSettingsButton";
             this.cancelSettingsButton.Size = new System.Drawing.Size(75, 23);
             this.cancelSettingsButton.TabIndex = 7;
@@ -114,15 +95,13 @@ namespace PCActivityTracker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(342, 215);
+            this.ClientSize = new System.Drawing.Size(342, 165);
             this.Controls.Add(this.cancelSettingsButton);
             this.Controls.Add(this.saveSettingsButton);
             this.Controls.Add(this.breakFreqInput);
             this.Controls.Add(this.breakFreqLabel);
             this.Controls.Add(this.dataLifetimeInput);
             this.Controls.Add(this.dataLifetimeLabel);
-            this.Controls.Add(this.pollingRateLabel);
-            this.Controls.Add(this.pollingRateInput);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -139,9 +118,6 @@ namespace PCActivityTracker
         }
 
         #endregion
-
-        private System.Windows.Forms.MaskedTextBox pollingRateInput;
-        private System.Windows.Forms.Label pollingRateLabel;
         private System.Windows.Forms.Label dataLifetimeLabel;
         private System.Windows.Forms.MaskedTextBox dataLifetimeInput;
         private System.Windows.Forms.Label breakFreqLabel;

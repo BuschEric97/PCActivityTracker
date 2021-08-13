@@ -33,7 +33,6 @@ namespace PCActivityTracker
             this.optionsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.getCurrentApps = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,23 +69,11 @@ namespace PCActivityTracker
             this.helpMenuItem.Text = "Help";
             this.helpMenuItem.Click += new System.EventHandler(this.helpMenuItem_Click);
             // 
-            // getCurrentApps
-            // 
-            this.getCurrentApps.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.getCurrentApps.Location = new System.Drawing.Point(691, 415);
-            this.getCurrentApps.Name = "getCurrentApps";
-            this.getCurrentApps.Size = new System.Drawing.Size(97, 23);
-            this.getCurrentApps.TabIndex = 1;
-            this.getCurrentApps.Text = "Get Current Apps";
-            this.getCurrentApps.UseVisualStyleBackColor = true;
-            this.getCurrentApps.Click += new System.EventHandler(this.getCurrentApps_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.getCurrentApps);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
@@ -105,7 +92,6 @@ namespace PCActivityTracker
         private System.Windows.Forms.ToolStripMenuItem optionsMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpMenuItem;
-        private System.Windows.Forms.Button getCurrentApps;
     }
 }
 

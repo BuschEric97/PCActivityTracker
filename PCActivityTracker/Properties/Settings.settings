@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PCActivityTracker.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="pollingRate" Type="System.TimeSpan" Scope="User">
-      <Value Profile="(Default)">00:00:05</Value>
-    </Setting>
     <Setting Name="dataLifetime" Type="System.TimeSpan" Scope="User">
       <Value Profile="(Default)">90.00:00:00</Value>
     </Setting>
