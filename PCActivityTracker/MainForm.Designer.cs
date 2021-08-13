@@ -91,6 +91,7 @@ namespace PCActivityTracker
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
             this.Text = "PC Activity Tracker";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);

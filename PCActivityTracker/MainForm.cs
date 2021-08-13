@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace PCActivityTracker
 {
-    public partial class MainForm : System.Windows.Forms.Form
+    public partial class MainForm : Form
     {
         public MainForm() {
             InitializeComponent();
@@ -31,6 +31,11 @@ namespace PCActivityTracker
             }
 
             MessageBox.Show(display_message);
+        }
+
+        private void MainForm_Load(object sender, EventArgs e) {
+            ApplicationTracker tracker = new ApplicationTracker();
+            tracker.CreateHandler();
         }
     }
 }

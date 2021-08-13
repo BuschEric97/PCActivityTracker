@@ -49,7 +49,7 @@ namespace PCActivityTracker.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("%LOCALAPPDATA%\\PCActivityTracker\\TrackingData\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\TrackingData\\")]
         public string dataDirectory {
             get {
                 return ((string)(this["dataDirectory"]));
@@ -70,10 +70,19 @@ namespace PCActivityTracker.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("%LOCALAPPDATA%\\PCActivityTracker\\blacklist.dat")]
+        [global::System.Configuration.DefaultSettingValueAttribute("blacklist.dat")]
         public string blacklistFile {
             get {
                 return ((string)(this["blacklistFile"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("tracker.log")]
+        public string logFile {
+            get {
+                return ((string)(this["logFile"]));
             }
         }
     }
