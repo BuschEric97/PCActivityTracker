@@ -27,28 +27,12 @@ namespace PCActivityTracker
         private const uint EVENT_SYSTEM_FOREGROUND = 3;
 
         [DllImport("user32.dll")]
-        static extern IntPtr GetForegroundWindow();
-
-        [DllImport("user32.dll")]
-        static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
+        static extern int GetWindowThreadProcessId(IntPtr hWnd, out uint processId);
 
         // store the delegate in a class field so that it is not garbage collected while we're using it
         static WinEventDelegate procDelegate = new WinEventDelegate(WinEventProc);
 
-        /// <summary>
-        /// Get the window title of the foreground application
-        /// </summary>
-        /// <returns></returns>
-        private static string GetActiveWindowTitle() {
-            const int NCHARS = 256;
-            StringBuilder Buff = new StringBuilder(NCHARS);
-            IntPtr handle = GetForegroundWindow();
-
-            if (GetWindowText(handle, Buff, NCHARS) > 0) {
-                return Buff.ToString();
-            }
-            return null;
-        }
+        static IntPtr hhook = IntPtr.Zero;
 
         /// <summary>
         /// This is the function that is called when the foreground application changes.
@@ -62,15 +46,22 @@ namespace PCActivityTracker
         /// <param name="dwmsEventTime"></param>
         static void WinEventProc(IntPtr hWinEventHook, uint eventType, IntPtr hwnd,
             int idObject, int idChild, uint dwEventThread, uint dwmsEventTime) {
-            Console.WriteLine("Active window changed to: " + GetActiveWindowTitle());
+            uint pid = 0;
+            GetWindowThreadProcessId(hwnd, out pid);
+            Process proc = Process.GetProcessById((int)pid);
+            Console.WriteLine("Active window changed to: " + proc.ProcessName);
         }
 
         /// <summary>
         /// Call this function to create a handler that does the application tracking
         /// </summary>
-        public void CreateHandler() {
-            IntPtr hhook = SetWinEventHook(EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_FOREGROUND,
+        public static void CreateHandler() {
+            hhook = SetWinEventHook(EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_FOREGROUND,
                 IntPtr.Zero, procDelegate, 0, 0, WINEVENT_OUTOFCONTEXT);
+        }
+
+        public static void DestroyHandler() {
+            UnhookWinEvent(hhook);
         }
     }
 

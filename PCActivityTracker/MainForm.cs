@@ -34,8 +34,14 @@ namespace PCActivityTracker
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
-            ApplicationTracker tracker = new ApplicationTracker();
-            tracker.CreateHandler();
+            Console.WriteLine("Creating Tracking Handler!");
+            ApplicationTracker.CreateHandler();
+            Application.ApplicationExit += new EventHandler(Application_Closing);
+        }
+
+        private void Application_Closing(object sender, EventArgs e) {
+            Console.WriteLine("Destroying Tracking Handler!");
+            ApplicationTracker.DestroyHandler();
         }
     }
 }
