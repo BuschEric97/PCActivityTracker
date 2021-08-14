@@ -34,6 +34,9 @@ namespace PCActivityTracker
 
         static IntPtr hhook = IntPtr.Zero;
 
+        static DateTime prevContextSwitchTime;
+        static string prevProcExeName = "";
+
         /// <summary>
         /// This is the function that is called when the foreground application changes.
         /// </summary>
@@ -46,10 +49,27 @@ namespace PCActivityTracker
         /// <param name="dwmsEventTime"></param>
         static void WinEventProc(IntPtr hWinEventHook, uint eventType, IntPtr hwnd,
             int idObject, int idChild, uint dwEventThread, uint dwmsEventTime) {
-            uint pid = 0;
-            GetWindowThreadProcessId(hwnd, out pid);
+            // get current time for calculations
+            DateTime now = DateTime.Now;
+
+            // get the executable name of the now current foreground application
+            GetWindowThreadProcessId(hwnd, out uint pid);
             Process proc = Process.GetProcessById((int)pid);
-            Console.WriteLine("Active window changed to: " + proc.ProcessName);
+            string procExeName = proc.ProcessName;
+
+            // calculate the amount of time spent on the previous process
+            TimeSpan prevProcTimeSpent = TimeSpan.Zero;
+            if (prevProcExeName != "") {
+                prevProcTimeSpent = now - prevContextSwitchTime;
+            }
+
+            // log to console
+            Console.WriteLine("Active window changed: " + procExeName);
+            Console.WriteLine("Previous time spent in " + prevProcExeName + ": " + prevProcTimeSpent.ToString());
+
+            // store current variables as previous for future calculations
+            prevContextSwitchTime = now;
+            prevProcExeName = procExeName;
         }
 
         /// <summary>
