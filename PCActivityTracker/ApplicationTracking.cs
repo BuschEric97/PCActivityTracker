@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace PCActivityTracker
 {
@@ -52,6 +54,10 @@ namespace PCActivityTracker
             // get current time for calculations
             DateTime now = DateTime.Now;
 
+            // construct today's data file
+            string dataFile = Environment.GetEnvironmentVariable("LocalAppData") + "\\PCActivityTracker\\TrackingData\\" +
+                now.Month.ToString() + "-" + now.Day.ToString() + "-" + now.Year.ToString() + ".json";
+
             // get the executable name of the now current foreground application
             GetWindowThreadProcessId(hwnd, out uint pid);
             Process proc = Process.GetProcessById((int)pid);
@@ -63,9 +69,36 @@ namespace PCActivityTracker
                 prevProcTimeSpent = now - prevContextSwitchTime;
             }
 
-            // log to console
-            Console.WriteLine("Active window changed: " + procExeName);
-            Console.WriteLine("Previous time spent in " + prevProcExeName + ": " + prevProcTimeSpent.ToString());
+            // do nothing with the data file if there was no previous process
+            if (prevProcExeName != "") {
+                // get existing data if today's data file exists, otherwise create new data
+                Dictionary<string, TimeSpan> trackingData = new Dictionary<string, TimeSpan>();
+                if (File.Exists(dataFile)) {
+                    // deserialize the data from the existing file into a dictionary
+                    using (StreamReader sr = File.OpenText(dataFile)) {
+                        string rjson = sr.ReadToEnd();
+                        trackingData = JsonConvert.DeserializeObject<Dictionary<string, TimeSpan>>(rjson);
+                    }
+                }
+
+                // add the time spent in previous process to the dictionary
+                if (trackingData.ContainsKey(prevProcExeName)) {
+                    trackingData[prevProcExeName] += prevProcTimeSpent;
+                } else {
+                    trackingData.Add(prevProcExeName, prevProcTimeSpent);
+                }
+
+                // serialize the dictionary into a json string and save to today's data file
+                string wjson = JsonConvert.SerializeObject(trackingData, Formatting.Indented);
+                using (StreamWriter sw = File.CreateText(dataFile)) {
+                    sw.Write(wjson);
+                }
+
+                // log to console
+                Console.WriteLine("Active window changed: " + procExeName);
+                Console.WriteLine("Previous time spent in " + prevProcExeName + ": " + prevProcTimeSpent.ToString());
+                Console.WriteLine("data file path: " + dataFile);
+            }
 
             // store current variables as previous for future calculations
             prevContextSwitchTime = now;
