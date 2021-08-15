@@ -59,5 +59,9 @@ namespace PCActivityTracker
             shutDownTrackerButton.Enabled = true;
             startTrackerButton.Enabled = false;
         }
+
+        private void reloadDataButton_Click(object sender, EventArgs e) {
+            MessageBox.Show("Function not yet implemented!");
+        }
     }
 }
