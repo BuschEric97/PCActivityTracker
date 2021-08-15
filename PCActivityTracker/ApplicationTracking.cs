@@ -55,8 +55,7 @@ namespace PCActivityTracker
             DateTime now = DateTime.Now;
 
             // construct today's data file
-            string dataFile = Environment.GetEnvironmentVariable("LocalAppData") + "\\PCActivityTracker\\TrackingData\\" +
-                now.Month.ToString() + "-" + now.Day.ToString() + "-" + now.Year.ToString() + ".json";
+            string dataFile = GetTodayDataFile();
 
             // get the executable name of the now current foreground application
             GetWindowThreadProcessId(hwnd, out uint pid);
@@ -97,7 +96,6 @@ namespace PCActivityTracker
                 // log to console
                 Console.WriteLine("Active window changed: " + procExeName);
                 Console.WriteLine("Previous time spent in " + prevProcExeName + ": " + prevProcTimeSpent.ToString());
-                Console.WriteLine("data file path: " + dataFile);
             }
 
             // store current variables as previous for future calculations
@@ -116,6 +114,16 @@ namespace PCActivityTracker
         public static void DestroyHandler() {
             UnhookWinEvent(hhook);
             hhook = IntPtr.Zero;
+        }
+
+        /// <summary>
+        /// Get the file path of the data file used for today
+        /// </summary>
+        /// <returns></returns>
+        public static string GetTodayDataFile() {
+            DateTime now = DateTime.Now;
+            return Environment.GetEnvironmentVariable("LocalAppData") + "\\PCActivityTracker\\TrackingData\\" +
+                now.Month.ToString() + "-" + now.Day.ToString() + "-" + now.Year.ToString() + ".json";
         }
     }
 }
