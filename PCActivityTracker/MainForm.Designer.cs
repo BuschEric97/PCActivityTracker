@@ -81,7 +81,7 @@ namespace PCActivityTracker
             // 
             this.shutDownTrackerButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.shutDownTrackerButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.shutDownTrackerButton.Location = new System.Drawing.Point(493, 415);
+            this.shutDownTrackerButton.Location = new System.Drawing.Point(493, 329);
             this.shutDownTrackerButton.Name = "shutDownTrackerButton";
             this.shutDownTrackerButton.Size = new System.Drawing.Size(127, 23);
             this.shutDownTrackerButton.TabIndex = 1;
@@ -91,7 +91,7 @@ namespace PCActivityTracker
             // startTrackerButton
             // 
             this.startTrackerButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.startTrackerButton.Location = new System.Drawing.Point(626, 415);
+            this.startTrackerButton.Location = new System.Drawing.Point(626, 329);
             this.startTrackerButton.Name = "startTrackerButton";
             this.startTrackerButton.Size = new System.Drawing.Size(127, 23);
             this.startTrackerButton.TabIndex = 2;
@@ -114,7 +114,7 @@ namespace PCActivityTracker
             this.trackerDataView.Location = new System.Drawing.Point(12, 27);
             this.trackerDataView.Name = "trackerDataView";
             this.trackerDataView.ReadOnly = true;
-            this.trackerDataView.Size = new System.Drawing.Size(475, 410);
+            this.trackerDataView.Size = new System.Drawing.Size(475, 324);
             this.trackerDataView.TabIndex = 3;
             // 
             // reloadDataButton
@@ -146,7 +146,7 @@ namespace PCActivityTracker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(765, 450);
+            this.ClientSize = new System.Drawing.Size(765, 364);
             this.Controls.Add(this.reloadDataButton);
             this.Controls.Add(this.trackerDataView);
             this.Controls.Add(this.startTrackerButton);
