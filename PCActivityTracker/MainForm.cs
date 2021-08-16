@@ -89,7 +89,7 @@ namespace PCActivityTracker
 
         private void LoadData_PastDay() {
             // get today's data filepath
-            string dataFile = ApplicationTracker.GetTodayDataFile();
+            string dataFile = TrackerDataFiles.GetTodayDataFile();
 
             // deserialize the data from the data file into a dictionary
             Dictionary<string, TimeSpan> trackingData = new Dictionary<string, TimeSpan>();
@@ -114,7 +114,7 @@ namespace PCActivityTracker
 
         private void LoadData_AllTime() {
             // get array of all data filepaths
-            string[] dataFiles = Directory.GetFiles(ApplicationTracker.GetDataFilesDirectory());
+            string[] dataFiles = Directory.GetFiles(TrackerDataFiles.GetDataFilesDirectory());
 
             // initialize the dictionary to store the data from all data files
             Dictionary<string, TimeSpan> trackingData = new Dictionary<string, TimeSpan>();

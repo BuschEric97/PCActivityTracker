@@ -55,7 +55,7 @@ namespace PCActivityTracker
             DateTime now = DateTime.Now;
 
             // construct today's data file
-            string dataFile = GetTodayDataFile();
+            string dataFile = TrackerDataFiles.GetTodayDataFile();
 
             // get the executable name of the now current foreground application
             GetWindowThreadProcessId(hwnd, out uint pid);
@@ -115,7 +115,10 @@ namespace PCActivityTracker
             UnhookWinEvent(hhook);
             hhook = IntPtr.Zero;
         }
+    }
 
+    class TrackerDataFiles
+    {
         /// <summary>
         /// Get the file path of the data file used for today
         /// </summary>
@@ -126,6 +129,10 @@ namespace PCActivityTracker
                 now.Month.ToString() + "-" + now.Day.ToString() + "-" + now.Year.ToString() + ".json";
         }
 
+        /// <summary>
+        /// Get the directory path of all data files
+        /// </summary>
+        /// <returns></returns>
         public static string GetDataFilesDirectory() {
             return Environment.GetEnvironmentVariable("LocalAppData") + "\\PCActivityTracker\\TrackingData\\";
         }

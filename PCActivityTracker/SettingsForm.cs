@@ -42,7 +42,7 @@ namespace PCActivityTracker
             if (MessageBox.Show("Are you sure you want to clear all data?",
                 "", MessageBoxButtons.YesNo) == DialogResult.Yes) {
                 // get array of all data filepaths
-                string[] dataFiles = Directory.GetFiles(ApplicationTracker.GetDataFilesDirectory());
+                string[] dataFiles = Directory.GetFiles(TrackerDataFiles.GetDataFilesDirectory());
 
                 // delete all files in the directory
                 foreach (string dataFile in dataFiles) {
