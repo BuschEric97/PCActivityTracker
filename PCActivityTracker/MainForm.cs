@@ -22,7 +22,7 @@ namespace PCActivityTracker
 
         private void helpMenuItem_Click(object sender, EventArgs e) {
             // Opening this website is a placeholder for until I make a proper help page
-            System.Diagnostics.Process.Start("https://github.com/BuschEric97/PCActivityTracker");
+            Process.Start("https://github.com/BuschEric97/PCActivityTracker");
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
@@ -33,6 +33,9 @@ namespace PCActivityTracker
             // set buttons appropriately for shutting down tracker listener
             shutDownTrackerButton.Enabled = true;
             startTrackerButton.Enabled = false;
+
+            // delete data files that are older than the expiration date
+            TrackerDataFiles.DeleteOldDataFiles();
 
             // load the current day's data into the data grid
             LoadData_PastDay();
@@ -74,6 +77,10 @@ namespace PCActivityTracker
         }
 
         private void reloadDataButton_Click(object sender, EventArgs e) {
+            // delete data files that are older than the expiration date
+            TrackerDataFiles.DeleteOldDataFiles();
+
+            // call the correct load data function
             switch (amountDataDisplayed.Text) {
                 case "past day":
                     LoadData_PastDay();

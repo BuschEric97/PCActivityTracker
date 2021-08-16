@@ -136,5 +136,24 @@ namespace PCActivityTracker
         public static string GetDataFilesDirectory() {
             return Environment.GetEnvironmentVariable("LocalAppData") + "\\PCActivityTracker\\TrackingData\\";
         }
+
+        /// <summary>
+        /// Delete data files that are older than the user specified lifetime
+        /// </summary>
+        public static void DeleteOldDataFiles() {
+            // get the date that the oldest file should be
+            DateTime killDate = DateTime.Now - Properties.Settings.Default.dataLifetime;
+
+            // get array of all data filepaths
+            string[] dataFiles = Directory.GetFiles(GetDataFilesDirectory());
+
+            foreach (string dataFile in dataFiles) {
+                DateTime fileDate = File.GetCreationTime(dataFile);
+                // delete the data file if it is older than the kill date
+                if (fileDate - killDate < TimeSpan.Zero) {
+                    File.Delete(dataFile);
+                }
+            }
+        }
     }
 }
