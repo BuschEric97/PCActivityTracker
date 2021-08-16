@@ -142,5 +142,13 @@ namespace PCActivityTracker
             // sort the data in ascending order based on program name
             trackerDataView.Sort(trackerDataView.Columns[0], System.ComponentModel.ListSortDirection.Ascending);
         }
+
+        private void minToNotifAreaButton_Click(object sender, EventArgs e) {
+            MessageBox.Show("Function not yet supported!");
+        }
+
+        private void shutDownAppButton_Click(object sender, EventArgs e) {
+            MessageBox.Show("Function not yet supported! Please use [X] at the top-right of the application for now!");
+        }
     }
 }

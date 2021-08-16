@@ -41,6 +41,8 @@ namespace PCActivityTracker
             this.programRuntime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.reloadDataButton = new System.Windows.Forms.Button();
             this.amountDataDisplayed = new System.Windows.Forms.ComboBox();
+            this.minToNotifAreaButton = new System.Windows.Forms.Button();
+            this.shutDownAppButton = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackerDataView)).BeginInit();
             this.SuspendLayout();
@@ -154,11 +156,33 @@ namespace PCActivityTracker
             this.amountDataDisplayed.Size = new System.Drawing.Size(127, 21);
             this.amountDataDisplayed.TabIndex = 5;
             // 
+            // minToNotifAreaButton
+            // 
+            this.minToNotifAreaButton.Location = new System.Drawing.Point(493, 300);
+            this.minToNotifAreaButton.Name = "minToNotifAreaButton";
+            this.minToNotifAreaButton.Size = new System.Drawing.Size(260, 23);
+            this.minToNotifAreaButton.TabIndex = 6;
+            this.minToNotifAreaButton.Text = "Minimize to Notification Area";
+            this.minToNotifAreaButton.UseVisualStyleBackColor = true;
+            this.minToNotifAreaButton.Click += new System.EventHandler(this.minToNotifAreaButton_Click);
+            // 
+            // shutDownAppButton
+            // 
+            this.shutDownAppButton.Location = new System.Drawing.Point(493, 271);
+            this.shutDownAppButton.Name = "shutDownAppButton";
+            this.shutDownAppButton.Size = new System.Drawing.Size(260, 23);
+            this.shutDownAppButton.TabIndex = 7;
+            this.shutDownAppButton.Text = "Shut Down Application";
+            this.shutDownAppButton.UseVisualStyleBackColor = true;
+            this.shutDownAppButton.Click += new System.EventHandler(this.shutDownAppButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(765, 364);
+            this.Controls.Add(this.shutDownAppButton);
+            this.Controls.Add(this.minToNotifAreaButton);
             this.Controls.Add(this.amountDataDisplayed);
             this.Controls.Add(this.reloadDataButton);
             this.Controls.Add(this.trackerDataView);
@@ -191,6 +215,8 @@ namespace PCActivityTracker
         private System.Windows.Forms.DataGridViewTextBoxColumn programName;
         private System.Windows.Forms.DataGridViewTextBoxColumn programRuntime;
         private System.Windows.Forms.ComboBox amountDataDisplayed;
+        private System.Windows.Forms.Button minToNotifAreaButton;
+        private System.Windows.Forms.Button shutDownAppButton;
     }
 }
 
