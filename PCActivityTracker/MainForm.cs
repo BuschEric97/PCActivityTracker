@@ -154,8 +154,7 @@ namespace PCActivityTracker
 
         private void shutDownAppButton_Click(object sender, EventArgs e) {
             if (MessageBox.Show("Are you sure you want to close the application?",
-                "",
-                MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                "", MessageBoxButtons.YesNo) == DialogResult.Yes) {
                 this.Close();
             }
         }

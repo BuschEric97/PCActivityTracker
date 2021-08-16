@@ -35,6 +35,7 @@ namespace PCActivityTracker
             this.breakFreqInput = new System.Windows.Forms.MaskedTextBox();
             this.saveSettingsButton = new System.Windows.Forms.Button();
             this.cancelSettingsButton = new System.Windows.Forms.Button();
+            this.clearDataButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // dataLifetimeLabel
@@ -57,7 +58,7 @@ namespace PCActivityTracker
             // breakFreqLabel
             // 
             this.breakFreqLabel.AutoSize = true;
-            this.breakFreqLabel.Location = new System.Drawing.Point(12, 61);
+            this.breakFreqLabel.Location = new System.Drawing.Point(12, 103);
             this.breakFreqLabel.Name = "breakFreqLabel";
             this.breakFreqLabel.Size = new System.Drawing.Size(151, 13);
             this.breakFreqLabel.TabIndex = 4;
@@ -65,7 +66,7 @@ namespace PCActivityTracker
             // 
             // breakFreqInput
             // 
-            this.breakFreqInput.Location = new System.Drawing.Point(230, 58);
+            this.breakFreqInput.Location = new System.Drawing.Point(230, 100);
             this.breakFreqInput.Mask = "90:00:00";
             this.breakFreqInput.Name = "breakFreqInput";
             this.breakFreqInput.Size = new System.Drawing.Size(100, 20);
@@ -73,7 +74,7 @@ namespace PCActivityTracker
             // 
             // saveSettingsButton
             // 
-            this.saveSettingsButton.Location = new System.Drawing.Point(174, 130);
+            this.saveSettingsButton.Location = new System.Drawing.Point(174, 187);
             this.saveSettingsButton.Name = "saveSettingsButton";
             this.saveSettingsButton.Size = new System.Drawing.Size(75, 23);
             this.saveSettingsButton.TabIndex = 6;
@@ -83,7 +84,7 @@ namespace PCActivityTracker
             // 
             // cancelSettingsButton
             // 
-            this.cancelSettingsButton.Location = new System.Drawing.Point(255, 130);
+            this.cancelSettingsButton.Location = new System.Drawing.Point(255, 187);
             this.cancelSettingsButton.Name = "cancelSettingsButton";
             this.cancelSettingsButton.Size = new System.Drawing.Size(75, 23);
             this.cancelSettingsButton.TabIndex = 7;
@@ -91,11 +92,22 @@ namespace PCActivityTracker
             this.cancelSettingsButton.UseVisualStyleBackColor = true;
             this.cancelSettingsButton.Click += new System.EventHandler(this.cancelSettingsButton_Click);
             // 
+            // clearDataButton
+            // 
+            this.clearDataButton.Location = new System.Drawing.Point(230, 32);
+            this.clearDataButton.Name = "clearDataButton";
+            this.clearDataButton.Size = new System.Drawing.Size(100, 23);
+            this.clearDataButton.TabIndex = 8;
+            this.clearDataButton.Text = "Clear All Data";
+            this.clearDataButton.UseVisualStyleBackColor = true;
+            this.clearDataButton.Click += new System.EventHandler(this.clearDataButton_Click);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(342, 165);
+            this.ClientSize = new System.Drawing.Size(342, 222);
+            this.Controls.Add(this.clearDataButton);
             this.Controls.Add(this.cancelSettingsButton);
             this.Controls.Add(this.saveSettingsButton);
             this.Controls.Add(this.breakFreqInput);
@@ -124,5 +136,6 @@ namespace PCActivityTracker
         private System.Windows.Forms.MaskedTextBox breakFreqInput;
         private System.Windows.Forms.Button saveSettingsButton;
         private System.Windows.Forms.Button cancelSettingsButton;
+        private System.Windows.Forms.Button clearDataButton;
     }
 }

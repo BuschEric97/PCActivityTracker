@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace PCActivityTracker
@@ -35,6 +36,22 @@ namespace PCActivityTracker
             // populate the settings form with the user's settings from the settings file
             dataLifetimeInput.Text = Properties.Settings.Default.dataLifetime.Days.ToString();
             breakFreqInput.Text = Properties.Settings.Default.breakFreq.ToString();
+        }
+
+        private void clearDataButton_Click(object sender, EventArgs e) {
+            if (MessageBox.Show("Are you sure you want to clear all data?",
+                "", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                // get array of all data filepaths
+                string[] dataFiles = Directory.GetFiles(ApplicationTracker.GetDataFilesDirectory());
+
+                // delete all files in the directory
+                foreach (string dataFile in dataFiles) {
+                    File.Delete(dataFile);
+                }
+
+                // show a confirmation message that all files were deleted
+                MessageBox.Show("Successfully cleared all data!");
+            }
         }
     }
 }
