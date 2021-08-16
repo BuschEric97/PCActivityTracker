@@ -46,23 +46,5 @@ namespace PCActivityTracker.Properties {
                 this["breakFreq"] = value;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("blacklist.dat")]
-        public string blacklistFile {
-            get {
-                return ((string)(this["blacklistFile"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("tracker.log")]
-        public string logFile {
-            get {
-                return ((string)(this["logFile"]));
-            }
-        }
     }
 }
