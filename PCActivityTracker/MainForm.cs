@@ -38,6 +38,9 @@ namespace PCActivityTracker
 
             // load the current day's data into the data grid
             LoadData_PastDay();
+
+            // set the selected choice of amountDataDisplayed to "past day" on load
+            amountDataDisplayed.Text = "past day";
         }
 
         private void Application_Closing(object sender, EventArgs e) {
@@ -67,7 +70,17 @@ namespace PCActivityTracker
         }
 
         private void reloadDataButton_Click(object sender, EventArgs e) {
-            LoadData_PastDay();
+            switch (amountDataDisplayed.Text) {
+                case "past day":
+                    LoadData_PastDay();
+                    break;
+                case "all time":
+                    LoadData_AllTime();
+                    break;
+                default:
+                    LoadData_PastDay();
+                    break;
+            }
         }
 
         private void LoadData_PastDay() {
@@ -96,7 +109,38 @@ namespace PCActivityTracker
         }
 
         private void LoadData_AllTime() {
-            MessageBox.Show("Function not yet implemented!");
+            // get array of all data filepaths
+            string[] dataFiles = Directory.GetFiles(ApplicationTracker.GetDataFilesDirectory());
+
+            // initialize the dictionary to store the data from all data files
+            Dictionary<string, TimeSpan> trackingData = new Dictionary<string, TimeSpan>();
+
+            // fill the trackingData dictionary with data from all data files
+            foreach (string dataFile in dataFiles) {
+                using (StreamReader sr = File.OpenText(dataFile)) {
+                    string json = sr.ReadToEnd();
+                    Dictionary<string, TimeSpan> tempTrackingData =
+                        JsonConvert.DeserializeObject<Dictionary<string, TimeSpan>>(json);
+                    foreach (KeyValuePair<string, TimeSpan> kv in tempTrackingData) {
+                        if (trackingData.ContainsKey(kv.Key)) {
+                            trackingData[kv.Key] += kv.Value;
+                        } else {
+                            trackingData.Add(kv.Key, kv.Value);
+                        }
+                    }
+                }
+            }
+
+            // clear the data grid before reloading data
+            trackerDataView.Rows.Clear();
+
+            // add the data into the data grid
+            foreach (KeyValuePair<string, TimeSpan> kv in trackingData) {
+                trackerDataView.Rows.Add(kv.Key, kv.Value);
+            }
+
+            // sort the data in ascending order based on program name
+            trackerDataView.Sort(trackerDataView.Columns[0], System.ComponentModel.ListSortDirection.Ascending);
         }
     }
 }

@@ -37,9 +37,10 @@ namespace PCActivityTracker
             this.shutDownTrackerButton = new System.Windows.Forms.Button();
             this.startTrackerButton = new System.Windows.Forms.Button();
             this.trackerDataView = new System.Windows.Forms.DataGridView();
-            this.reloadDataButton = new System.Windows.Forms.Button();
             this.programName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.programRuntime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.reloadDataButton = new System.Windows.Forms.Button();
+            this.amountDataDisplayed = new System.Windows.Forms.ComboBox();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackerDataView)).BeginInit();
             this.SuspendLayout();
@@ -117,17 +118,6 @@ namespace PCActivityTracker
             this.trackerDataView.Size = new System.Drawing.Size(475, 324);
             this.trackerDataView.TabIndex = 3;
             // 
-            // reloadDataButton
-            // 
-            this.reloadDataButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.reloadDataButton.Location = new System.Drawing.Point(493, 27);
-            this.reloadDataButton.Name = "reloadDataButton";
-            this.reloadDataButton.Size = new System.Drawing.Size(127, 23);
-            this.reloadDataButton.TabIndex = 4;
-            this.reloadDataButton.Text = "Reload Data";
-            this.reloadDataButton.UseVisualStyleBackColor = true;
-            this.reloadDataButton.Click += new System.EventHandler(this.reloadDataButton_Click);
-            // 
             // programName
             // 
             this.programName.HeaderText = "Program Name";
@@ -142,11 +132,34 @@ namespace PCActivityTracker
             this.programRuntime.ReadOnly = true;
             this.programRuntime.Width = 200;
             // 
+            // reloadDataButton
+            // 
+            this.reloadDataButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.reloadDataButton.Location = new System.Drawing.Point(493, 27);
+            this.reloadDataButton.Name = "reloadDataButton";
+            this.reloadDataButton.Size = new System.Drawing.Size(127, 23);
+            this.reloadDataButton.TabIndex = 4;
+            this.reloadDataButton.Text = "Reload Data";
+            this.reloadDataButton.UseVisualStyleBackColor = true;
+            this.reloadDataButton.Click += new System.EventHandler(this.reloadDataButton_Click);
+            // 
+            // amountDataDisplayed
+            // 
+            this.amountDataDisplayed.FormattingEnabled = true;
+            this.amountDataDisplayed.Items.AddRange(new object[] {
+            "past day",
+            "all time"});
+            this.amountDataDisplayed.Location = new System.Drawing.Point(493, 56);
+            this.amountDataDisplayed.Name = "amountDataDisplayed";
+            this.amountDataDisplayed.Size = new System.Drawing.Size(127, 21);
+            this.amountDataDisplayed.TabIndex = 5;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(765, 364);
+            this.Controls.Add(this.amountDataDisplayed);
             this.Controls.Add(this.reloadDataButton);
             this.Controls.Add(this.trackerDataView);
             this.Controls.Add(this.startTrackerButton);
@@ -177,6 +190,7 @@ namespace PCActivityTracker
         private System.Windows.Forms.Button reloadDataButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn programName;
         private System.Windows.Forms.DataGridViewTextBoxColumn programRuntime;
+        private System.Windows.Forms.ComboBox amountDataDisplayed;
     }
 }
 

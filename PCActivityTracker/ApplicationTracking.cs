@@ -125,5 +125,9 @@ namespace PCActivityTracker
             return Environment.GetEnvironmentVariable("LocalAppData") + "\\PCActivityTracker\\TrackingData\\" +
                 now.Month.ToString() + "-" + now.Day.ToString() + "-" + now.Year.ToString() + ".json";
         }
+
+        public static string GetDataFilesDirectory() {
+            return Environment.GetEnvironmentVariable("LocalAppData") + "\\PCActivityTracker\\TrackingData\\";
+        }
     }
 }
