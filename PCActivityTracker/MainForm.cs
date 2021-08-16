@@ -148,7 +148,8 @@ namespace PCActivityTracker
         }
 
         private void minToNotifAreaButton_Click(object sender, EventArgs e) {
-            MessageBox.Show("Function not yet supported!");
+            this.ShowInTaskbar = false;
+            this.WindowState = FormWindowState.Minimized;
         }
 
         private void shutDownAppButton_Click(object sender, EventArgs e) {
