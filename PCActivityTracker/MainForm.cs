@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace PCActivityTracker
 {
@@ -32,6 +35,9 @@ namespace PCActivityTracker
             // set buttons appropriately for shutting down tracker listener
             shutDownTrackerButton.Enabled = true;
             startTrackerButton.Enabled = false;
+
+            // load the current day's data into the data grid
+            LoadData_PastDay();
         }
 
         private void Application_Closing(object sender, EventArgs e) {
@@ -61,6 +67,35 @@ namespace PCActivityTracker
         }
 
         private void reloadDataButton_Click(object sender, EventArgs e) {
+            LoadData_PastDay();
+        }
+
+        private void LoadData_PastDay() {
+            // get today's data filepath
+            string dataFile = ApplicationTracker.GetTodayDataFile();
+
+            // deserialize the data from the data file into a dictionary
+            Dictionary<string, TimeSpan> trackingData = new Dictionary<string, TimeSpan>();
+            if (File.Exists(dataFile)) {
+                using (StreamReader sr = File.OpenText(dataFile)) {
+                    string json = sr.ReadToEnd();
+                    trackingData = JsonConvert.DeserializeObject<Dictionary<string, TimeSpan>>(json);
+                }
+            }
+
+            // clear the data grid before reloading data
+            trackerDataView.Rows.Clear();
+
+            // add the data into the data grid
+            foreach (KeyValuePair<string, TimeSpan> kv in trackingData) {
+                trackerDataView.Rows.Add(kv.Key, kv.Value);
+            }
+
+            // sort the data in ascending order based on program name
+            trackerDataView.Sort(trackerDataView.Columns[0], System.ComponentModel.ListSortDirection.Ascending);
+        }
+
+        private void LoadData_AllTime() {
             MessageBox.Show("Function not yet implemented!");
         }
     }
