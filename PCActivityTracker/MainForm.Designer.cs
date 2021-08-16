@@ -29,6 +29,7 @@ namespace PCActivityTracker
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.optionsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +50,7 @@ namespace PCActivityTracker
             this.optionsMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip.Size = new System.Drawing.Size(765, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip";
             // 
@@ -80,7 +81,7 @@ namespace PCActivityTracker
             // 
             this.shutDownTrackerButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.shutDownTrackerButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.shutDownTrackerButton.Location = new System.Drawing.Point(528, 415);
+            this.shutDownTrackerButton.Location = new System.Drawing.Point(493, 415);
             this.shutDownTrackerButton.Name = "shutDownTrackerButton";
             this.shutDownTrackerButton.Size = new System.Drawing.Size(127, 23);
             this.shutDownTrackerButton.TabIndex = 1;
@@ -90,7 +91,7 @@ namespace PCActivityTracker
             // startTrackerButton
             // 
             this.startTrackerButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.startTrackerButton.Location = new System.Drawing.Point(661, 415);
+            this.startTrackerButton.Location = new System.Drawing.Point(626, 415);
             this.startTrackerButton.Name = "startTrackerButton";
             this.startTrackerButton.Size = new System.Drawing.Size(127, 23);
             this.startTrackerButton.TabIndex = 2;
@@ -113,13 +114,13 @@ namespace PCActivityTracker
             this.trackerDataView.Location = new System.Drawing.Point(12, 27);
             this.trackerDataView.Name = "trackerDataView";
             this.trackerDataView.ReadOnly = true;
-            this.trackerDataView.Size = new System.Drawing.Size(510, 411);
+            this.trackerDataView.Size = new System.Drawing.Size(475, 410);
             this.trackerDataView.TabIndex = 3;
             // 
             // reloadDataButton
             // 
             this.reloadDataButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.reloadDataButton.Location = new System.Drawing.Point(528, 27);
+            this.reloadDataButton.Location = new System.Drawing.Point(493, 27);
             this.reloadDataButton.Name = "reloadDataButton";
             this.reloadDataButton.Size = new System.Drawing.Size(127, 23);
             this.reloadDataButton.TabIndex = 4;
@@ -132,23 +133,26 @@ namespace PCActivityTracker
             this.programName.HeaderText = "Program Name";
             this.programName.Name = "programName";
             this.programName.ReadOnly = true;
+            this.programName.Width = 200;
             // 
             // programRuntime
             // 
             this.programRuntime.HeaderText = "Program Runtime";
             this.programRuntime.Name = "programRuntime";
             this.programRuntime.ReadOnly = true;
+            this.programRuntime.Width = 200;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(765, 450);
             this.Controls.Add(this.reloadDataButton);
             this.Controls.Add(this.trackerDataView);
             this.Controls.Add(this.startTrackerButton);
             this.Controls.Add(this.shutDownTrackerButton);
             this.Controls.Add(this.menuStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
             this.Text = "PC Activity Tracker";
