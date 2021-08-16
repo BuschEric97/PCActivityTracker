@@ -29,6 +29,7 @@ namespace PCActivityTracker
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.optionsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,6 +44,7 @@ namespace PCActivityTracker
             this.amountDataDisplayed = new System.Windows.Forms.ComboBox();
             this.minToNotifAreaButton = new System.Windows.Forms.Button();
             this.shutDownAppButton = new System.Windows.Forms.Button();
+            this.runningNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackerDataView)).BeginInit();
             this.SuspendLayout();
@@ -147,6 +149,7 @@ namespace PCActivityTracker
             // 
             // amountDataDisplayed
             // 
+            this.amountDataDisplayed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.amountDataDisplayed.FormattingEnabled = true;
             this.amountDataDisplayed.Items.AddRange(new object[] {
             "past day",
@@ -158,6 +161,7 @@ namespace PCActivityTracker
             // 
             // minToNotifAreaButton
             // 
+            this.minToNotifAreaButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.minToNotifAreaButton.Location = new System.Drawing.Point(493, 300);
             this.minToNotifAreaButton.Name = "minToNotifAreaButton";
             this.minToNotifAreaButton.Size = new System.Drawing.Size(260, 23);
@@ -168,6 +172,7 @@ namespace PCActivityTracker
             // 
             // shutDownAppButton
             // 
+            this.shutDownAppButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.shutDownAppButton.Location = new System.Drawing.Point(493, 271);
             this.shutDownAppButton.Name = "shutDownAppButton";
             this.shutDownAppButton.Size = new System.Drawing.Size(260, 23);
@@ -175,6 +180,13 @@ namespace PCActivityTracker
             this.shutDownAppButton.Text = "Shut Down Application";
             this.shutDownAppButton.UseVisualStyleBackColor = true;
             this.shutDownAppButton.Click += new System.EventHandler(this.shutDownAppButton_Click);
+            // 
+            // runningNotifyIcon
+            // 
+            this.runningNotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("runningNotifyIcon.Icon")));
+            this.runningNotifyIcon.Text = "PC Activity Tracker is running!";
+            this.runningNotifyIcon.Visible = true;
+            this.runningNotifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.runningNotifyIcon_MouseDoubleClick);
             // 
             // MainForm
             // 
@@ -191,6 +203,7 @@ namespace PCActivityTracker
             this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
+            this.MinimizeBox = false;
             this.Name = "MainForm";
             this.Text = "PC Activity Tracker";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -217,6 +230,7 @@ namespace PCActivityTracker
         private System.Windows.Forms.ComboBox amountDataDisplayed;
         private System.Windows.Forms.Button minToNotifAreaButton;
         private System.Windows.Forms.Button shutDownAppButton;
+        private System.Windows.Forms.NotifyIcon runningNotifyIcon;
     }
 }
 

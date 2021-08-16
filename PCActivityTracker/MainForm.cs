@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace PCActivityTracker
 {
@@ -29,9 +30,6 @@ namespace PCActivityTracker
             Console.WriteLine("Creating Tracking Handler!");
             ApplicationTracker.CreateHandler();
 
-            // set the app close event handler for shutting down tracker listener
-            Application.ApplicationExit += new EventHandler(Application_Closing);
-
             // set buttons appropriately for shutting down tracker listener
             shutDownTrackerButton.Enabled = true;
             startTrackerButton.Enabled = false;
@@ -43,10 +41,16 @@ namespace PCActivityTracker
             amountDataDisplayed.Text = "past day";
         }
 
-        private void Application_Closing(object sender, EventArgs e) {
-            // shut down the tracker listener
-            Console.WriteLine("Destroying Tracking Handler!");
-            ApplicationTracker.DestroyHandler();
+        protected override void OnFormClosing(FormClosingEventArgs e) {
+            if (new StackTrace().GetFrames().Any(x => x.GetMethod().Name == "Close")) {
+                e.Cancel = false;
+                Console.WriteLine("Destroying Tracking Handler!");
+                ApplicationTracker.DestroyHandler();
+            } else {
+                e.Cancel = true;
+                this.ShowInTaskbar = false;
+                this.WindowState = FormWindowState.Minimized;
+            }
         }
 
         private void shutDownTrackerButton_Click(object sender, EventArgs e) {
@@ -148,7 +152,17 @@ namespace PCActivityTracker
         }
 
         private void shutDownAppButton_Click(object sender, EventArgs e) {
-            MessageBox.Show("Function not yet supported! Please use [X] at the top-right of the application for now!");
+            if (MessageBox.Show("Are you sure you want to close the application?",
+                "",
+                MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                this.Close();
+            }
+        }
+
+        private void runningNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e) {
+            // bring the application out of minimized and back into the taskbar
+            this.WindowState = FormWindowState.Normal;
+            this.ShowInTaskbar = true;
         }
     }
 }
