@@ -49,7 +49,7 @@ namespace PCActivityTracker
             } else {
                 e.Cancel = true;
                 this.ShowInTaskbar = false;
-                this.WindowState = FormWindowState.Minimized;
+                this.Hide();
             }
         }
 
@@ -149,7 +149,7 @@ namespace PCActivityTracker
 
         private void minToNotifAreaButton_Click(object sender, EventArgs e) {
             this.ShowInTaskbar = false;
-            this.WindowState = FormWindowState.Minimized;
+            this.Hide();
         }
 
         private void shutDownAppButton_Click(object sender, EventArgs e) {
@@ -162,7 +162,7 @@ namespace PCActivityTracker
 
         private void runningNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e) {
             // bring the application out of minimized and back into the taskbar
-            this.WindowState = FormWindowState.Normal;
+            this.Show();
             this.ShowInTaskbar = true;
         }
     }
