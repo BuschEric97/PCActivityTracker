@@ -29,6 +29,11 @@ namespace PCActivityTracker
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
+            // create the tracking data folder if it doesn't exist
+            if (!Directory.Exists(TrackerDataFiles.GetDataFilesDirectory())) {
+                Directory.CreateDirectory(TrackerDataFiles.GetDataFilesDirectory());
+            }
+
             // start the tracker listener
             Console.WriteLine("Creating Tracking Handler!");
             ApplicationTracker.CreateHandler();
