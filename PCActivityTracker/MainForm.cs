@@ -5,11 +5,14 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using System.Linq;
+using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace PCActivityTracker
 {
     public partial class MainForm : Form
     {
+        private static Timer breakTimer;
+
         public MainForm() {
             InitializeComponent();
         }
@@ -42,6 +45,12 @@ namespace PCActivityTracker
 
             // set the selected choice of amountDataDisplayed to "past day" on load
             amountDataDisplayed.Text = "past day";
+
+            // set up and start the break notification timer
+            breakTimer = new Timer();
+            breakTimer.Interval = (int)Properties.Settings.Default.breakFreq.TotalMilliseconds;
+            breakTimer.Tick += OnBreakTimerEvent;
+            breakTimer.Start();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e) {
@@ -170,6 +179,10 @@ namespace PCActivityTracker
             // bring the application out of minimized and back into the taskbar
             this.Show();
             this.ShowInTaskbar = true;
+        }
+
+        private void OnBreakTimerEvent(Object sender, EventArgs e) {
+            new ToastContentBuilder().AddText("It's time to take a break!").Show();
         }
     }
 }
