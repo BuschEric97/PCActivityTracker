@@ -138,6 +138,22 @@ namespace PCActivityTracker
         }
 
         /// <summary>
+        /// Get the file path for the file that contains display name aliases for the tracked processes
+        /// </summary>
+        /// <returns></returns>
+        public static string GetAliasesFile() {
+            return Environment.GetEnvironmentVariable("LocalAppData") + "\\PCActivityTracker\\aliases.json";
+        }
+
+        /// <summary>
+        /// Get the file path for the file containing processes to ignore in tracking
+        /// </summary>
+        /// <returns></returns>
+        public static string GetBlacklistFile() {
+            return Environment.GetEnvironmentVariable("LocalAppData") + "\\PCActivityTracker\\blacklist.json";
+        }
+
+        /// <summary>
         /// Delete data files that are older than the user specified lifetime
         /// </summary>
         public static void DeleteOldDataFiles() {
