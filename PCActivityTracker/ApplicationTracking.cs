@@ -60,7 +60,7 @@ namespace PCActivityTracker
             // get the executable name of the now current foreground application
             GetWindowThreadProcessId(hwnd, out uint pid);
             Process proc = Process.GetProcessById((int)pid);
-            string procExeName = proc.ProcessName;
+            string procExeName = TrackerDataFiles.GetMainModuleFileName(proc);
 
             // calculate the amount of time spent on the previous process
             TimeSpan prevProcTimeSpent = TimeSpan.Zero;
@@ -88,14 +88,41 @@ namespace PCActivityTracker
                 }
 
                 // serialize the dictionary into a json string and save to today's data file
-                string wjson = JsonConvert.SerializeObject(trackingData, Formatting.Indented);
                 using (StreamWriter sw = File.CreateText(dataFile)) {
+                    string wjson = JsonConvert.SerializeObject(trackingData, Formatting.Indented);
                     sw.Write(wjson);
                 }
 
-                // log to console
-                Console.WriteLine("Active window changed: " + procExeName);
-                Console.WriteLine("Previous time spent in " + prevProcExeName + ": " + prevProcTimeSpent.ToString());
+                // get aliases file
+                string aFile = TrackerDataFiles.GetAliasesFile();
+
+                // get existing aliases
+                Dictionary<string, string> aliases = new Dictionary<string, string>();
+                if (File.Exists(aFile)) {
+                    // deserialize the data
+                    using (StreamReader sr = File.OpenText(aFile)) {
+                        string rjson = sr.ReadToEnd();
+                        aliases = JsonConvert.DeserializeObject<Dictionary<string, string>>(rjson);
+                    }
+                }
+
+                // add or update the alias of the previous process
+                if (aliases.ContainsKey(prevProcExeName)) {
+                    aliases[prevProcExeName] = FileVersionInfo.GetVersionInfo(prevProcExeName).ProductName;
+                } else {
+                    aliases.Add(prevProcExeName, FileVersionInfo.GetVersionInfo(prevProcExeName).ProductName);
+                }
+
+                // serialize the aliases dictionary and save to aliases file
+                using (StreamWriter sw = File.CreateText(aFile)) {
+                    string wjson = JsonConvert.SerializeObject(aliases, Formatting.Indented);
+                    sw.Write(wjson);
+                }
+
+                    // log to console
+                    Console.WriteLine("Active window changed: " + procExeName);
+                Console.WriteLine("Previous time spent in " + prevProcExeName + "(" + aliases[prevProcExeName] +
+                    "): " + prevProcTimeSpent.ToString());
             }
 
             // store current variables as previous for future calculations
@@ -119,6 +146,20 @@ namespace PCActivityTracker
 
     class TrackerDataFiles
     {
+        [DllImport("Kernel32.dll")]
+        private static extern bool QueryFullProcessImageName([In] IntPtr hProcess, [In] uint dwFlags, [Out] StringBuilder lpExeName, ref uint lpdwSize);
+
+        public static string GetMainModuleFileName(Process process, int buffer = 1024) {
+            var fileNameBuilder = new StringBuilder(buffer);
+            uint bufferLength = (uint)fileNameBuilder.Capacity + 1;
+            if (QueryFullProcessImageName(process.Handle, 0, fileNameBuilder, ref bufferLength)) {
+                return fileNameBuilder.ToString();
+            } else {
+                return "";
+            }
+        }
+
+
         /// <summary>
         /// Get the file path of the data file used for today
         /// </summary>
