@@ -46,7 +46,7 @@ namespace PCActivityTracker
             TrackerDataFiles.DeleteOldDataFiles();
 
             // load the current day's data into the data grid
-            LoadData_PastDay();
+            reloadDataButton_Click(sender, e);
 
             // set the selected choice of amountDataDisplayed to "past day" on load
             amountDataDisplayed.Text = "past day";
@@ -94,21 +94,41 @@ namespace PCActivityTracker
             // delete data files that are older than the expiration date
             TrackerDataFiles.DeleteOldDataFiles();
 
+            Dictionary<string, TimeSpan> trackingData = new Dictionary<string, TimeSpan>();
+
             // call the correct load data function
             switch (amountDataDisplayed.Text) {
                 case "past day":
-                    LoadData_PastDay();
+                    trackingData = LoadData_PastDay();
                     break;
                 case "all time":
-                    LoadData_AllTime();
+                    trackingData = LoadData_AllTime();
                     break;
                 default:
-                    LoadData_PastDay();
+                    trackingData = LoadData_PastDay();
                     break;
             }
+
+            // clear the data grid before reloading data
+            trackerDataView.Rows.Clear();
+
+            // add the data into the data grid
+            foreach (KeyValuePair<string, TimeSpan> kv in trackingData) {
+                string displayName = "";
+                using (StreamReader sr = new StreamReader(TrackerDataFiles.GetAliasesFile())) {
+                    string json = sr.ReadToEnd();
+                    Dictionary<string, string> aliases = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+                    displayName = aliases[kv.Key];
+                }
+
+                trackerDataView.Rows.Add(displayName, kv.Value);
+            }
+
+            // sort the data in ascending order based on program name
+            trackerDataView.Sort(trackerDataView.Columns[0], System.ComponentModel.ListSortDirection.Ascending);
         }
 
-        private void LoadData_PastDay() {
+        private Dictionary<string, TimeSpan> LoadData_PastDay() {
             // get today's data filepath
             string dataFile = TrackerDataFiles.GetTodayDataFile();
 
@@ -121,19 +141,10 @@ namespace PCActivityTracker
                 }
             }
 
-            // clear the data grid before reloading data
-            trackerDataView.Rows.Clear();
-
-            // add the data into the data grid
-            foreach (KeyValuePair<string, TimeSpan> kv in trackingData) {
-                trackerDataView.Rows.Add(kv.Key, kv.Value);
-            }
-
-            // sort the data in ascending order based on program name
-            trackerDataView.Sort(trackerDataView.Columns[0], System.ComponentModel.ListSortDirection.Ascending);
+            return trackingData;
         }
 
-        private void LoadData_AllTime() {
+        private Dictionary<string, TimeSpan> LoadData_AllTime() {
             // get array of all data filepaths
             string[] dataFiles = Directory.GetFiles(TrackerDataFiles.GetDataFilesDirectory());
 
@@ -156,16 +167,7 @@ namespace PCActivityTracker
                 }
             }
 
-            // clear the data grid before reloading data
-            trackerDataView.Rows.Clear();
-
-            // add the data into the data grid
-            foreach (KeyValuePair<string, TimeSpan> kv in trackingData) {
-                trackerDataView.Rows.Add(kv.Key, kv.Value);
-            }
-
-            // sort the data in ascending order based on program name
-            trackerDataView.Sort(trackerDataView.Columns[0], System.ComponentModel.ListSortDirection.Ascending);
+            return trackingData;
         }
 
         private void minToNotifAreaButton_Click(object sender, EventArgs e) {
