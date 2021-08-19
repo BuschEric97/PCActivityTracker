@@ -114,11 +114,13 @@ namespace PCActivityTracker
 
             // add the data into the data grid
             foreach (KeyValuePair<string, TimeSpan> kv in trackingData) {
-                string displayName = "";
-                using (StreamReader sr = new StreamReader(TrackerDataFiles.GetAliasesFile())) {
-                    string json = sr.ReadToEnd();
-                    Dictionary<string, string> aliases = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
-                    displayName = aliases[kv.Key];
+                string displayName = kv.Key;
+                if (File.Exists(TrackerDataFiles.GetAliasesFile())) {
+                    using (StreamReader sr = new StreamReader(TrackerDataFiles.GetAliasesFile())) {
+                        string json = sr.ReadToEnd();
+                        Dictionary<string, string> aliases = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+                        displayName = aliases[kv.Key];
+                    }
                 }
 
                 trackerDataView.Rows.Add(displayName, kv.Value);
