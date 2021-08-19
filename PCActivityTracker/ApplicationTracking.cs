@@ -107,10 +107,14 @@ namespace PCActivityTracker
                 }
 
                 // add or update the alias of the previous process
+                string alias = FileVersionInfo.GetVersionInfo(prevProcExeName).ProductName;
+                if (alias == "") {
+                    alias = proc.MainWindowTitle;
+                }
                 if (aliases.ContainsKey(prevProcExeName)) {
-                    aliases[prevProcExeName] = FileVersionInfo.GetVersionInfo(prevProcExeName).ProductName;
+                    aliases[prevProcExeName] = alias;
                 } else {
-                    aliases.Add(prevProcExeName, FileVersionInfo.GetVersionInfo(prevProcExeName).ProductName);
+                    aliases.Add(prevProcExeName, alias);
                 }
 
                 // serialize the aliases dictionary and save to aliases file
